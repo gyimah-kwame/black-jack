@@ -20,6 +20,10 @@ public class Player {
         return name;
     }
 
+    public int getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return "Player{" +

@@ -13,6 +13,7 @@ public class BlackJack {
     private Stack<Card> shuffledCards;
     private Map<Card, Integer> selectedCards;
     private List<Player> players;
+    private Map<Player, List<Card>> playerCards;
 
 
     public BlackJack() {
@@ -65,7 +66,7 @@ public class BlackJack {
             Card card = unShuffledCards.get(index);
 
             if (!selectedCards.containsKey(card)) {
-                shuffledCards.add(card);
+                shuffledCards.push(card);
                 selectedCards.put(card, index);
                 counter++;
             }
@@ -90,6 +91,24 @@ public class BlackJack {
     public List<Player> getPlayers() {
         return players;
     }
+
+    public void assignCardsToAllPlayers() {
+        for (Player player: players) {
+            assignCardsToPlayer(player, 2);
+        }
+    }
+
+    private void assignCardsToPlayer(Player player, int numberOfCards) {
+        List<Card> cards = new ArrayList<>();
+
+        for (int i=1; i<= numberOfCards; i++) {
+            cards.add(shuffledCards.pop());
+        }
+
+        playerCards.put(player, cards);
+    }
+
+
 }
 
 

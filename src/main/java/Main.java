@@ -14,9 +14,11 @@ public class Main {
            }
 
            BlackJack blackJack = new BlackJack();
-           blackJack.shuffle();
+           blackJack.shuffle(); //shuffle cards
 
-           blackJack.createPlayers(numberOfPlayers);
+           blackJack.createPlayers(numberOfPlayers); // create all players
+
+           blackJack.assignCardsToAllPlayers(); // assign cards to all players
 
            System.out.println(blackJack.getPlayers());
 
