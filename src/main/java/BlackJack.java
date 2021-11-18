@@ -6,6 +6,7 @@ import models.Player;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class BlackJack {
 
@@ -42,13 +43,52 @@ public class BlackJack {
     }
 
     private void assignCardsToPlayer(Player player, int numberOfCards) {
-        List<Card> cards = new ArrayList<>();
+
+        List<Card> cards = playerCards.get(player) == null ? new ArrayList<>() :  playerCards.get(player);
 
         for (int i=1; i<= numberOfCards; i++) {
             cards.add(deck.getShuffledCards().pop());
         }
 
         playerCards.put(player, cards);
+    }
+
+    public int getValueOfCards(Player player) {
+       return playerCards.get(player).stream().map(x -> x.getRank().getValue()).reduce(0, (a,b) -> a+b);
+    }
+
+
+    public void hit(Player player) {
+        assignCardsToPlayer(player, 1);
+    }
+
+    public void displayPlayerCards() {
+        for (Map.Entry<Player,List<Card>> items: playerCards.entrySet()) {
+            System.out.println(items.getKey().getName() + " cards => "+items.getValue().stream().map(x -> format(x)).collect(Collectors.toList()));
+        }
+    }
+
+    private String format(Card card) {
+        return card.getRank() + " of " + card.getSuit();
+    }
+
+    public boolean simulate() {
+
+        boolean ended = false;
+
+        Scanner scanner = new Scanner(System.in);
+
+        while (!ended) {
+
+            for (Player player : players) {
+
+                System.out.println(player.getName() + "'s turn: ");
+                System.out.println("\nChoose either 1 or 2 to continue.\n1. hit\n2. stick");
+            }
+
+        }
+
+        return true;
     }
 
 

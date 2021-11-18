@@ -23,7 +23,15 @@ public class Main {
 //
            blackJack.assignCardsToAllPlayers(); // assign cards to all players
 
-           System.out.println(blackJack.getPlayers());
+           blackJack.displayPlayerCards();
+
+           blackJack.hit(blackJack.getPlayers().get(0));
+
+           System.out.println("\n\n");
+
+           blackJack.displayPlayerCards();
+
+
 
        }catch (NumberFormatException e) {
 
