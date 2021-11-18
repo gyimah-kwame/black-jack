@@ -1,4 +1,5 @@
 import constants.Suit;
+import models.Deck;
 
 public class Main {
 
@@ -13,11 +14,13 @@ public class Main {
                return;
            }
 
-           BlackJack blackJack = new BlackJack();
-           blackJack.shuffle(); //shuffle cards
+           Deck deck = new Deck();
+           BlackJack blackJack = new BlackJack(deck);
+
+           deck.shuffle(); //shuffle cards
 
            blackJack.createPlayers(numberOfPlayers); // create all players
-
+//
            blackJack.assignCardsToAllPlayers(); // assign cards to all players
 
            System.out.println(blackJack.getPlayers());
