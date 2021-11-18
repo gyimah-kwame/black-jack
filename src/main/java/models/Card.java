@@ -20,4 +20,12 @@ public class Card {
     public Rank getRank() {
         return rank;
     }
+
+    @Override
+    public String toString() {
+        return "Card{" +
+                "suit=" + suit +
+                ", rank=" + rank +
+                '}';
+    }
 }
