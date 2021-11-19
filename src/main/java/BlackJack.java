@@ -1,5 +1,4 @@
-import constants.Rank;
-import constants.Suit;
+
 import models.Card;
 import models.Deck;
 import models.Player;
@@ -71,53 +70,6 @@ public class BlackJack {
         return card.getRank() + " of " + card.getSuit();
     }
 
-    public boolean simulate() {
-
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("\nChoose either 1 or 2 to continue.\n1. hit\n2. stick");
-
-        while (!ended) {
-
-            int playersSize = players.size();
-
-            for (int i=0; i<playersSize; i++) {
-
-                Player player = players.get(i);
-
-                displayPlayerCards(player);
-
-                System.out.print(player.getName() + "'s turn: ");
-
-                int option = scanner.nextInt();
-
-                options.put(player, option);
-
-                if (option == 1) {
-                    assignCardsToPlayer(player, 1);
-
-                }
-
-                displayPlayerCards(player);
-                System.out.println();
-
-                scores.put(player, getValueOfCards(player));
-
-                if (i == playersSize-1) {
-
-                    decide();
-
-                   scores.clear();
-                }
-
-            }
-
-            ejectPlayers();
-
-        }
-
-        return true;
-    }
 
     private void decide() {
 
@@ -192,6 +144,47 @@ public class BlackJack {
         }
     }
 
+
+    public void simulate() {
+        while (!ended) {
+
+            int playersSize = players.size();
+
+            System.out.println("simulating...");
+
+            for (int i=0; i<playersSize; i++) {
+
+                Player player = players.get(i);
+
+                displayPlayerCards(player);
+
+                long value = getValueOfCards(player);
+
+                if (value < 17) {
+                    options.put(player, 1);
+                    assignCardsToPlayer(player, 1);
+                }else {
+                    options.put(player, 2);
+                }
+
+                displayPlayerCards(player);
+                System.out.println();
+
+                scores.put(player, getValueOfCards(player));
+
+                if (i == playersSize-1) {
+
+                    decide();
+
+                    scores.clear();
+                }
+
+            }
+
+            ejectPlayers();
+
+        }
+    }
 
 
 }
