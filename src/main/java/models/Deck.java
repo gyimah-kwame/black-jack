@@ -7,7 +7,7 @@ import java.util.*;
 
 public class Deck {
 
-    private Stack<Card> shuffledCards;
+    private final Stack<Card> shuffledCards;
 
     public Deck() {
         shuffledCards = new Stack<>();
@@ -20,23 +20,12 @@ public class Deck {
 
 
     /**
-     * create card
-     *
-     * @param rank Rank of card
-     * @param suit suit of card
-     * @return Card
-     */
-    private Card createCard(Rank rank, Suit suit){
-        return new Card(suit, rank);
-    }
-
-    /**
      * add a card to unshuffled list
      * @param suit suit
      */
     private void storeCard(Suit suit) {
         for (Rank rank : Rank.values()) {
-            Card card = createCard(rank, suit);
+            Card card = new Card(suit, rank);
             shuffledCards.push(card);
         }
     }
@@ -46,7 +35,6 @@ public class Deck {
      */
     public void shuffle() {
         Collections.shuffle(shuffledCards);
-
     }
 
     public Stack<Card> getShuffledCards() {
